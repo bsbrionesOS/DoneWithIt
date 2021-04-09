@@ -3,10 +3,11 @@ import { StyleSheet, Image } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import AppButton from "../components/AppButton";
 import AppTextInput from "../components/AppTextInput";
 import ErrorMessage from "../components/ErrorMessage";
 import Screen from "../components/Screen";
+import SubmitButton from "../components/SubmitButton";
+import AppFormField from "../components/AppFormField";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -22,31 +23,27 @@ function LoginScreen(props) {
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
+        {({ handleChange, errors, setFieldTouched, touched }) => (
           <>
-            <AppTextInput
-              placeholder="Email"
+            <AppFormField
+              autoCapitalize="none"
+              autoCorrect={false}
               icon="email"
-              autoCapitalize="none"
-              autoCorrect={false}
               keyboardType="email-address"
-              onChangeText={handleChange("email")}
+              name="email"
+              placeholder="Email"
               textContentType="emailAddress"
-              onBlur={() => setFieldTouched("email")}
             />
-            <ErrorMessage error={errors.email} visible={touched.email} />
-            <AppTextInput
-              placeholder="password"
-              icon="lock"
+            <AppFormField
               autoCapitalize="none"
               autoCorrect={false}
-              secureTextEntry={true}
-              onChangeText={handleChange("password")}
-              onBlur={() => setFieldTouched("password")}
+              icon="lock"
+              name="password"
+              placeholder="password"
+              secureTextEntry
               textContentType="password"
             />
-            <ErrorMessage error={errors.password} visible={touched.password} />
-            <AppButton title="Login" onPress={handleSubmit} />
+            <SubmitButton title="Login" />
           </>
         )}
       </Formik>
