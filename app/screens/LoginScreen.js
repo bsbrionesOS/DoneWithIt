@@ -2,9 +2,16 @@ import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import AppTextInput from "../components/AppTextInput";
 import { Formik } from "formik";
+import * as Yup from "yup";
 
 import Screen from "../components/Screen";
 import AppButton from "../components/AppButton";
+import AppText from "../components/AppText";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required().email().label("Email"),
+  password: Yup.string().required().min(4).label("Password"),
+});
 
 function LoginScreen(props) {
   return (
@@ -13,8 +20,9 @@ function LoginScreen(props) {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
+        validationSchema={validationSchema}
       >
-        {({ handleChange, handleSubmit }) => (
+        {({ handleChange, handleSubmit, errors }) => (
           <>
             <AppTextInput
               placeholder="Email"
@@ -25,6 +33,7 @@ function LoginScreen(props) {
               onChangeText={handleChange("email")}
               textContentType="emailAddress"
             ></AppTextInput>
+            <AppText style={{ color: "red" }}>{errors.email}</AppText>
             <AppTextInput
               placeholder="password"
               icon="lock"
@@ -34,6 +43,7 @@ function LoginScreen(props) {
               onChangeText={handleChange("password")}
               textContentType="password"
             ></AppTextInput>
+            <AppText style={{ color: "red" }}>{errors.password}</AppText>
             <AppButton title="Login" onPress={handleSubmit} />
           </>
         )}
