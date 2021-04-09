@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { SafeAreaView, View } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView, TextInput, View, Text } from "react-native";
 import AppButton from "./app/components/AppButton";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
@@ -12,13 +12,12 @@ import Icon from "./app/components/Icon";
 import ListItem from "./app/components/ListItem";
 import AccountScreen from "./app/screens/AccountScreen";
 import ListingScreen from "./app/screens/ListingScreen";
+import AppTextInput from "./app/components/AppTextInput";
 
 export default function App() {
-  return <ListingScreen />;
-  //<AccountScreen />;
-  // <Icon name="email" size={50} backgroundColor="red" iconColor="white" />
-  //<Messages />;
-  //<ViewImageScreen />;
-  //<ListingDetailsScreen></ListingDetailsScreen>;
-  // <WelcomeScreen />;
+  return (
+    <Screen>
+      <AppTextInput placeholder="Username" icon="email" />
+    </Screen>
+  );
 }
