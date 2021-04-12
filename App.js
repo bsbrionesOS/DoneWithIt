@@ -10,7 +10,7 @@ import ListingEditScreen from "./app/screens/ListingEditScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import Messages from "./app/screens/MessagesScreen";
 import ImageInput from "./app/components/ImageInput";
-import ImageInputList from "./app/components/forms/ImageInputList";
+import ImageInputList from "./app/components/ImageInputList";
 
 export default function App() {
   const [imageUris, setImageUris] = useState([]);
