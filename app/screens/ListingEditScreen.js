@@ -3,9 +3,9 @@ import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 import {
-  AppForm as Form,
-  AppFormField as FormField,
-  AppFormPicker as Picker,
+  Form,
+  FormField,
+  FormPicker as Picker,
   SubmitButton,
 } from "../components/forms";
 import Screen from "../components/Screen";
@@ -22,7 +22,7 @@ const categories = [
   {
     backgroundColor: "#fc5c65",
     icon: "floor-lamp",
-    label: "Furniture",
+    label: "Lamps",
     value: 1,
   },
   {
@@ -34,7 +34,7 @@ const categories = [
   {
     backgroundColor: "#fed330",
     icon: "camera",
-    label: "Cameras",
+    label: "Camera",
     value: 3,
   },
   {
@@ -46,7 +46,7 @@ const categories = [
   {
     backgroundColor: "#2bcbba",
     icon: "shoe-heel",
-    label: "Clothing",
+    label: "Shoes",
     value: 5,
   },
   {
