@@ -1,8 +1,8 @@
 import client from "./client";
 
-const endPoint = "/listings";
+const endpoint = "/listings";
 
-const getListings = () => client.get(endPoint);
+const getListings = () => client.get(endpoint);
 
 const addListing = (listing) => {
   const data = new FormData();
