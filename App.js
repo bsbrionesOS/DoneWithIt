@@ -26,6 +26,7 @@ import RegisterScreen from "./app/screens/RegisterScreen";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import NavigationTheme from "./app/navigation/NavigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
+import OfflineNotice from "./app/components/OfflineNotice";
 
 const Stack = createStackNavigator();
 
@@ -82,8 +83,11 @@ const TabNavigator = () => (
 
 export default function App() {
   return (
-    <NavigationContainer theme={NavigationTheme}>
-      <AppNavigator />
-    </NavigationContainer>
+    <>
+      <OfflineNotice />
+      <NavigationContainer theme={NavigationTheme}>
+        <AppNavigator />
+      </NavigationContainer>
+    </>
   );
 }
