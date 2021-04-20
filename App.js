@@ -27,67 +27,17 @@ import AuthNavigator from "./app/navigation/AuthNavigator";
 import NavigationTheme from "./app/navigation/NavigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import OfflineNotice from "./app/components/OfflineNotice";
-
-const Stack = createStackNavigator();
-
-const StackNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Screen name="Tweets" component={Tweets} />
-    <Stack.Screen
-      name="TweetDetails"
-      component={TweetDetails}
-      options={({ route }) => ({ title: route.params.value })}
-    />
-  </Stack.Navigator>
-);
-
-const Link = () => {
-  const navigation = useNavigation();
-
-  return (
-    <Button
-      title="Click"
-      onPress={() => navigation.navigate("TweetDetails", { value: 1 })}
-    />
-  );
-};
-
-const Tweets = ({ navigation }) => (
-  <Screen>
-    <Text> Tweets</Text>
-    <Link />
-  </Screen>
-);
-
-const TweetDetails = ({ route }) => (
-  <Screen>
-    <Text> TweetDetail</Text>
-    <Text> hello {route.params.value}</Text>
-  </Screen>
-);
-
-const Account = () => (
-  <Screen>
-    <Text>Account</Text>
-  </Screen>
-);
-
-const Tab = createBottomTabNavigator();
-
-const TabNavigator = () => (
-  <Tab.Navigator>
-    <Tab.Screen name="Feed" component={StackNavigator} />
-    <Tab.Screen name="Account" component={Account} />
-  </Tab.Navigator>
-);
+import AuthContext from "./app/auth/context";
 
 export default function App() {
+  const [user, setUser] = useState();
+
   return (
-    <>
+    <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
       <NavigationContainer theme={NavigationTheme}>
-        <AuthNavigator />
+        {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
-    </>
+    </AuthContext.Provider>
   );
 }
