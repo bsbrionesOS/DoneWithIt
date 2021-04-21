@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
+import AppLoading from "expo-app-loading";
 import {
   SafeAreaView,
   TextInput,
@@ -33,6 +34,7 @@ import jwtDecode from "jwt-decode";
 
 export default function App() {
   const [user, setUser] = useState();
+  const [isReady, setIsReady] = useState(false);
 
   const restoreToken = async () => {
     const token = authStorage.getToken();
@@ -40,9 +42,14 @@ export default function App() {
 
     setUser(jwtDecode(token));
   };
-  useEffect(() => {
-    restoreToken();
-  }, []);
+  if (!isReady)
+    return (
+      <AppLoading
+        startAsync={restoreToken}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    );
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
