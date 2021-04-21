@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
 import jwtDecode from "jwt-decode";
-
+import authStorage from "../auth/storage";
 import Screen from "../components/Screen";
 import authApi from "../api/auth";
 import {
@@ -28,6 +28,7 @@ function LoginScreen(props) {
     setLoginFailed(false);
     const user = jwtDecode(result.data);
     authContext.setUser(user);
+    authStorage.storeToken(result.data);
   };
 
   return (

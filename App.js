@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   TextInput,
@@ -28,9 +28,21 @@ import NavigationTheme from "./app/navigation/NavigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import OfflineNotice from "./app/components/OfflineNotice";
 import AuthContext from "./app/auth/context";
+import authStorage from "./app/auth/storage";
+import jwtDecode from "jwt-decode";
 
 export default function App() {
   const [user, setUser] = useState();
+
+  const restoreToken = async () => {
+    const token = authStorage.getToken();
+    if (!token) return;
+
+    setUser(jwtDecode(token));
+  };
+  useEffect(() => {
+    restoreToken();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
