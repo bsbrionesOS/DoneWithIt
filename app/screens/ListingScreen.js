@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
-// import ActivityIndicator from "../components/ActivityIndicator";
+import ActivityIndicator from "../components/ActivityIndicator";
 import Button from "../components/Button";
 import Screen from "../components/Screen";
 import Card from "../components/Card";
@@ -21,28 +21,30 @@ function ListingScreen({ navigation }) {
   }, []);
 
   return (
-    <Screen style={styles.screen}>
-      {error && (
-        <>
-          <AppText>Couldn't retrive the listings</AppText>
-          <Button title="Retry" onPress={loadListings} />
-        </>
-      )}
-      {/* <ActivityIndicator visible={loading} /> */}
-      <FlatList
-        data={listings}
-        keyExtractor={(listings) => listings.id.toString()}
-        renderItem={({ item }) => (
-          <Card
-            title={item.title}
-            subTitle={`$${item.price}`}
-            imageUrl={item.images[0].url}
-            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
-            thumbnailUrl={item.images[0].thumbnailUrl}
-          />
+    <>
+      <ActivityIndicator visible={loading} />
+      <Screen style={styles.screen}>
+        {error && (
+          <>
+            <AppText>Couldn't retrive the listings</AppText>
+            <Button title="Retry" onPress={loadListings} />
+          </>
         )}
-      />
-    </Screen>
+        <FlatList
+          data={listings}
+          keyExtractor={(listings) => listings.id.toString()}
+          renderItem={({ item }) => (
+            <Card
+              title={item.title}
+              subTitle={`$${item.price}`}
+              imageUrl={item.images[0].url}
+              onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+              thumbnailUrl={item.images[0].thumbnailUrl}
+            />
+          )}
+        />
+      </Screen>
+    </>
   );
 }
 
